@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+# Created by .ignore support plugin (hsz.mobi)
+# Operating System Files
+
+git
+target/
+
+*.idea
+
+
