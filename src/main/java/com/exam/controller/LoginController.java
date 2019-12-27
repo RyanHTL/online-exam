@@ -25,17 +25,6 @@ public class LoginController {
     @Autowired
     LoginServices loginServices;
 
-
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @RequestMapping("/register")
-    public String register() {
-        return "register";
-    }
-
     @ResponseBody
     @RequestMapping(value = "/checklogin",method= RequestMethod.POST)//
     public Map<String,Object> checklogin(String loginname, String password, String verifyCodeActual,HttpServletRequest request) {
@@ -62,25 +51,5 @@ public class LoginController {
         return modelMap;
     }
 
-    //@ResponseBody
-    //@RequestMapping(value = "/checklogin",method= RequestMethod.POST)//
-    //public Map<String,Object> checklogin(String loginname, String password, String verifyCodeActual) {
-    //
-    //    System.out.println("UserInput==" + loginname + "-" + password+"-"+verifyCodeActual);
-    //    Map<String,Object> modelMap= new HashMap<>();
-    //
-    //
-    //        Student student = loginServices.checkUser(loginname, password);
-    //        if (student != null) {
-    //            modelMap.put("success", true);
-    //            modelMap.put("errMsg", "登录成功");
-    //        } else {
-    //            modelMap.put("success", false);
-    //            modelMap.put("errMsg", "账户或者密码错误！");
-    //        }
-    //
-    //
-    //    return modelMap;
-    //}
 
 }

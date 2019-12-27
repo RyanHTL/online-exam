@@ -1,6 +1,6 @@
 package com.exam.services.impl;
 
-import com.exam.dao.LoginDao;
+import com.exam.dao.StudentDao;
 import com.exam.demain.Student;
 import com.exam.services.LoginServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class LoginServicesImpl implements LoginServices {
 
     @Resource
-    LoginDao dao;
+    StudentDao dao;
 
     @Override
     public Student checkUser(String account, String password) {

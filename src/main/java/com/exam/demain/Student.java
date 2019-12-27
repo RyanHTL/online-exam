@@ -1,64 +1,12 @@
 package com.exam.demain;
 
-import org.springframework.context.annotation.Bean;
+import com.alibaba.fastjson.JSONObject;
+import org.json.simple.JSONArray;
 
 
-public class Student {
-    private Integer id;
-    private String account; //账号
-    private String studentName; //名字
-    private String password;
-    private Integer age;
-    private String sex;
+public class Student extends User{
     private Integer classid;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+    private String phone;
 
     public Integer getClassid() {
         return classid;
@@ -68,17 +16,26 @@ public class Student {
         this.classid = classid;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
+                "classid=" + classid +
+                ", phone=" + phone +
+                ", id=" + id +
                 ", account='" + account + '\'' +
-                ", studentName='" + studentName + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
                 ", age=" + age +
                 ", sex='" + sex + '\'' +
-                ", classid=" + classid +
                 '}';
     }
 }
