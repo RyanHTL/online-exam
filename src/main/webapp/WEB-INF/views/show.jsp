@@ -21,7 +21,7 @@
     $(window).on('load',function(){
         $.ajax({
             type: "post",
-            url: "${pageContext.request.contextPath}/studentController/selectparper",
+            url: "${pageContext.request.contextPath}/studentController/getQuestions",
             data: {'id':1},
             dataType:'json',
             success: function (data) {

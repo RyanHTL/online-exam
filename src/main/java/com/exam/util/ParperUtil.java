@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ParperUtil {
 
-    public ArrayList<Question> allQuestions(Paper paper,String type){
+    public ArrayList<Question> questionsByType(Paper paper,String type){
 
         JSONObject object1 = paper.getContent().getJSONObject("content");
         ArrayList<Question> questions = new ArrayList<>();
@@ -27,25 +27,31 @@ public class ParperUtil {
             // 考题id
             q.setTitle(object.getString("title"));
 
-            //  解析答案"answer": {
-            //                    "a": "a",
-            //                    "b": "b",
-            //                }
-            JSONObject an = object.getJSONObject("answer");
-            ArrayList<String> answer = new ArrayList<>();
-            Iterator iter1 = an.entrySet().iterator();
-            while (iter1.hasNext()) {
-                Map.Entry entry = (Map.Entry) iter1.next();
-                answer.add(entry.getKey().toString());
-            }
-            q.setAnswer(answer);
+            /**
+             * 解析答案
+             * "answer": {
+             *      "a": "a",
+             *      "b": "b",
+             *  }
+             */
+            //JSONObject an = object.getJSONObject("answer");
+            //ArrayList<String> answer = new ArrayList<>();
+            //Iterator iter1 = an.entrySet().iterator();
+            //while (iter1.hasNext()) {
+            //    Map.Entry entry = (Map.Entry) iter1.next();
+            //    answer.add(entry.getKey().toString());
+            //}
+            //q.setAnswer(answer);
 
-            // 解析选项 "choose": {
-            //                    "a": "a1",
-            //                    "a1": "a1",
-            //                    "a2": "a1",
-            //                    "a3": "a1"
-            //                }
+            /**
+             * 解析选项
+             * "choose": {
+             *     "a": "a1",
+             *     "a1": "a1",
+             *     "a2": "a1",
+             *     "a3": "a1"
+             *   }
+             */
             JSONObject ch = object.getJSONObject("choose");
             Map<String,String> choose =new HashMap<>();
             Iterator iter2 = ch.entrySet().iterator();
@@ -64,6 +70,38 @@ public class ParperUtil {
         return questions;
 
     }
+
+    public ArrayList<String> answersBytype(Paper paper,String type){
+
+        JSONObject object1 = paper.getContent().getJSONObject("content");
+        ArrayList<String> answer = new ArrayList<>();
+        //System.out.println(object1);
+
+        JSONArray object2 = object1.getJSONArray(type);
+        //System.out.println(object2);
+        for (int i = 0; i < object2.size(); i++) {
+            JSONObject object = object2.getJSONObject(i);
+            //  解析答案"answer": {
+            //                    "a": "a",
+            //                    "b": "b",
+            //                }
+            JSONObject an = object.getJSONObject("answer");
+            Iterator iter = an.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
+                answer.add(entry.getKey().toString());
+            }
+
+        }
+        System.out.println(answer.toString());
+
+        return answer;
+
+    }
+
+
+
+
 
 
 }

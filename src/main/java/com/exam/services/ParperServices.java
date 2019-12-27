@@ -9,6 +9,8 @@ public interface ParperServices {
 
     Paper selectPaper(int id);
 
-    ArrayList<Question> questions(Integer paperid);
+    ArrayList<Question> getQuestions(Integer paperid);
+
+    ArrayList<String> getAnswersToParper(Integer paperid);
 
 }

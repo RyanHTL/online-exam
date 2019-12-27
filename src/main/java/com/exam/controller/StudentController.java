@@ -27,7 +27,7 @@ public class StudentController {
     public ArrayList<Question> selectparper(Integer id){
         //Paper paper = services.selectPaper(id);
         ArrayList<Question> questions;
-        questions = services.questions(id);
+        questions = services.getQuestions(id);
         return questions;
     }
 
