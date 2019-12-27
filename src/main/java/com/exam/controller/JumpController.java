@@ -39,4 +39,9 @@ public class JumpController {
     public String testing(){
         return "testing";
     }
+
+    @RequestMapping("/show")
+    public String show(){
+        return "show";
+    }
 }

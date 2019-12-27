@@ -34,10 +34,10 @@
 
             <form class="m-t" role="form" >
                 <div class="form-group">
-                    <input type="text" id="loginname" class="form-control" placeholder="用户名" required="">
+                    <input type="text" id="loginname" class="form-control" placeholder="用户名" value="111111">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" class="form-control" placeholder="密码" required="">
+                    <input type="password" id="password" class="form-control" placeholder="密码" value="111111">
                 </div>
 
                 <%--       验证码         --%>
@@ -47,6 +47,7 @@
                 </div>
                 <button id="commit" type="button" class="btn btn-primary block full-width m-b">登 录</button>
                 <p class="text-muted text-center"> <a href="login.jsp#"><small>忘记密码了？</small></a> | <a href="${pageContext.request.contextPath}/jumpController/register">注册一个新账号</a>
+                    <a href="${pageContext.request.contextPath}/jumpController/show">testJSON</a>
                 </p>
             </form>
         </div>

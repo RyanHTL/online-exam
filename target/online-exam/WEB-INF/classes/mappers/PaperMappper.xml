@@ -5,7 +5,7 @@
         <result column="content" property="content" typeHandler="com.exam.util.ObjectJsonHandler"/>
     </resultMap>
 
-    <select id="selectPaper" resultType="com.exam.demain.Paper">
+    <select id="selectPaper" resultMap="paperMap">
         select * from testpaper where id = #{id}
     </select>
 </mapper>
