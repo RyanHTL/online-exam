@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 
 public class Student extends User{
     private Integer classid;
+    private String className;
     private String phone;
 
     public Integer getClassid() {
@@ -20,6 +21,14 @@ public class Student extends User{
         return phone;
     }
 
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -28,7 +37,8 @@ public class Student extends User{
     public String toString() {
         return "Student{" +
                 "classid=" + classid +
-                ", phone=" + phone +
+                ", className='" + className + '\'' +
+                ", phone='" + phone + '\'' +
                 ", id=" + id +
                 ", account='" + account + '\'' +
                 ", name='" + name + '\'' +

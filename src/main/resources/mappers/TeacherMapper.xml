@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.exam.dao.TeacherDao">
+    <resultMap id="ExamResultMap" type="com.exam.demain.Test"  autoMapping="true"><!-- autoMapping="true" 自动映射（自动忽略下划线） -->
+
+    </resultMap>
+
+    <insert id="addQuestions"></insert>
+    <insert id="addParper" parameterType="com.exam.demain.TestPaper" keyProperty="id" useGeneratedKeys="true">
+       INSERT INTO testpaper (content,courseid,createuser)
+        values (#{testPaper.content},#{testPaper.courseid},#{testPaper.createuser})
+    </insert>
+    <insert id="addParperToStatus" >
+       INSERT INTO teststatus(testpaperid,classid,`status`)
+        values (#{id},#{classid},#{status})
+    </insert>
+
+
+    <update id="updateTeacherInfo"></update>
+    <update id="updateSutdentInfo"></update>
+    <update id="updateQuestion"></update>
+    <select id="selectAllStudents" resultType="com.exam.demain.Student"></select>
+    <select id="selectStudentInfoByid" resultType="com.exam.demain.Student"></select>
+    <select id="selectAllQuestions" resultType="com.exam.demain.Question"></select>
+    <select id="selectAllClazzResultPaper" resultType="com.exam.demain.ResultPaper"></select>
+    <select id="findResultByRule" resultMap="ExamResultMap" parameterType="com.exam.demain.Test" resultType="java.util.HashMap">
+         SELECT * FROM
+        (SELECT t1.id,t1.title,t1.selectA,t1.selectB,t1.selectC,t1.selectD,t1.selectE,t1.anwser
+        FROM selectquestion AS t1 JOIN (SELECT ROUND(RAND() * ((SELECT MAX(id) FROM selectquestion where type=1)-(SELECT MIN(id) FROM selectquestion  where type=1)))+(SELECT MIN(id) FROM selectquestion where type = 1) AS id ) AS t2
+        WHERE t1.id >= t2.id
+        ORDER BY t1.id LIMIT #{single})t3
+        union
+        SELECT * FROM
+        (SELECT t1.id,t1.title,t1.selectA,t1.selectB,t1.selectC,t1.selectD,t1.selectE,t1.anwser
+        FROM selectquestion AS t1 JOIN (SELECT ROUND(RAND() * ((SELECT MAX(id) FROM selectquestion where type = 0)-(SELECT MIN(id) FROM selectquestion where type = 0)))+(SELECT MIN(id) FROM selectquestion where type = 0)  AS id ) AS t2
+        WHERE t1.id >= t2.id
+        ORDER BY t1.id LIMIT #{multiple})t4
+    </select>
+</mapper>

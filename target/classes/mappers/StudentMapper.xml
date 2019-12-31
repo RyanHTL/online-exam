@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.exam.dao.StudentDao">
-    <resultMap id="StuResultMap" type="com.exam.demain.Student"  autoMapping="true"><!-- autoMapping="true" 自动映射（自动忽略下划线） -->
+    <resultMap id="StuResultMap" type="com.exam.demain.Student"
+               autoMapping="true"><!-- autoMapping="true" 自动映射（自动忽略下划线） -->
         <result column="account" property="account"/>
         <result column="name" property="name"/>
         <result column="password" property="password"/>
@@ -9,12 +10,24 @@
         <result column="sex" property="sex"/>
         <result column="role" property="role"/>
         <result column="classid" property="classid"/>
+        <result column="className" property="className"/>
         <result column="phone" property="phone"/>
     </resultMap>
 
 
-
     <select id="checkUser" resultMap="StuResultMap">
-        select * from user_info where account =#{account} and password = #{password}
+        select * from user_info u JOIN clazz c ON c.Id = u.classid where account =#{account} and password = #{password}
+    </select>
+
+    <select id="selectAllPaperByStuid" resultType="com.exam.demain.Paper">
+
+    </select>
+
+    <select id="selectMyResultPaper" resultType="com.exam.demain.Paper">
+
+    </select>
+
+    <select id="selectUnitTestQuestions" resultType="com.exam.demain.Question">
+
     </select>
 </mapper>

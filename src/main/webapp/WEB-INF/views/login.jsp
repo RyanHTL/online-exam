@@ -34,7 +34,7 @@
 
             <form class="m-t" role="form" >
                 <div class="form-group">
-                    <input type="text" id="loginname" class="form-control" placeholder="用户名" value="111111">
+                    <input type="text" id="loginname" class="form-control" placeholder="用户名" value="111113">
                 </div>
                 <div class="form-group">
                     <input type="password" id="password" class="form-control" placeholder="密码" value="111111">
@@ -80,10 +80,14 @@
                     dataType:"json",
                     data:data,
                     success: function (data) {
-                        window.location.href = "${pageContext.request.contextPath}/jumpController/index";
-                        console.log(data);
+                        // console.log(data);
                         if (data.success) {
                             alert('SUCCESS!');
+                            if(data.role == 1){
+                                window.location.href = "${pageContext.request.contextPath}/jumpController/index";
+                            }else if (data.role == 2){
+                                window.location.href = "${pageContext.request.contextPath}/jumpController/student_index";
+                            }
 
                         } else {
                             alert('ERROR！' + data.errMsg);

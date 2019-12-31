@@ -2,6 +2,7 @@ package com.exam.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 跳转控制，跳转页面
@@ -25,23 +26,37 @@ public class JumpController {
         return "index";
     }
 
-    @RequestMapping(value = "/index_v1")
+    @RequestMapping(value = "/student_index")
     public String index_v1(){
-        return "index_v1";
+        return "student_index";
     }
 
-    @RequestMapping(value = "/studentonlinetest")
-    public String studentonlinetest(){
-        return "studentonlinetest";
+
+
+    @RequestMapping(value = "/student_info")
+    public String student_info(){
+        return "student_info";
     }
 
     @RequestMapping(value = "/testing")
-    public String testing(){
-        return "testing";
+    public ModelAndView  testing(Integer id ){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("paper", id);
+        modelAndView.setViewName("testing");
+        return modelAndView;
+    }
+    @RequestMapping(value = "/testresult")
+    public String  testresult(Integer id ){
+        return "testresultlist";
     }
 
     @RequestMapping("/show")
     public String show(){
         return "show";
+    }
+
+    @RequestMapping("/studenttable")
+    public String studenttable(){
+        return "studenttable";
     }
 }

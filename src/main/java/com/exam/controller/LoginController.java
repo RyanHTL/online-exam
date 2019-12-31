@@ -39,15 +39,17 @@ public class LoginController {
             modelMap.put("errMsg", "输入了错误的验证码");
         }else {
             Student student = loginServices.checkUser(loginname, password);
+            System.out.println("UserInfo=>"+student.toString());
             if (student != null) {
+                modelMap.put("role",student.getRole());
                 modelMap.put("success", true);
                 modelMap.put("errMsg", "登录成功");
             } else {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", "账户或者密码错误！");
             }
+            request.getSession().setAttribute("loginuser",student);
         }
-
         return modelMap;
     }
 

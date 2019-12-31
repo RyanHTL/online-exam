@@ -6,6 +6,9 @@
     </resultMap>
 
     <select id="selectPaper" resultMap="paperMap">
-        select * from testpaper where id = #{id}
+        SELECT t.* ,s.starttime,s.endtime,s.keeptime
+        FROM testpaper t
+	    JOIN subscription s ON s.testid = t.id
+        where t.id = #{id}
     </select>
 </mapper>

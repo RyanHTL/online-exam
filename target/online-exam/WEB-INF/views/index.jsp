@@ -49,59 +49,14 @@
                     </div>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/index_v1">
+                    <a class="J_menuItem" href="index_v1.html">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">主页</span>
                     </a>
                 </li>
-                <!--学生部分-->
 
-                <li>
-                    <a href="#">
-                        <i class="fa fa-edit"></i>
-                        <span class="nav-label">在线考试</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/studentonlinetest">考试</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-edit"></i>
-                        <span class="nav-label">成绩管理 </span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="mailbox.html">查看成绩</a>
-                        </li>
-
-                    </ul>
-                </li>
                 <!--老师部分-->
 
-                <li>
-                    <a href="#">
-                        <i class="fa fa-edit"></i>
-                        <span class="nav-label">考题管理 </span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="mailbox.html">上传题库</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="mailbox.html">修改考题</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="mailbox.html">错题集</a>
-                        </li>
-
-                    </ul>
-                </li>
                 <li>
                     <a href="#">
                         <i class="fa fa-edit"></i>
@@ -110,31 +65,12 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="studenttable.html">查看学生</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/studenttable">查看学生</a>
                         </li>
 
                     </ul>
                 </li>
-                <!--管理员部分-->
-                <li>
-                    <a href="#">
-                        <i class="fa fa-edit"></i>
-                        <span class="nav-label">用户管理 </span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="usertables.html">查看用户</a>
-                        </li>
 
-                    </ul>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="mailbox.html">修改权限</a>
-                        </li>
-
-                    </ul>
-                </li>
                 <li>
                     <a href="#">
                         <i class="fa fa-edit"></i>
@@ -149,7 +85,7 @@
                     </ul>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="testing.html">修改题库</a>
+                            <a class="J_menuItem" href="read_over.html">批改考题</a>
                         </li>
 
                     </ul>
@@ -181,7 +117,7 @@
             </nav>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe id="J_iframe" width="100%" height="100%" src="${pageContext.request.contextPath}/jumpController/index_v1" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            <iframe id="J_iframe" width="100%" height="100%" src="index_v1.html" frameborder="0" data-id="index_v1.html" seamless></iframe>
         </div>
     </div>
 

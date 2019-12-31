@@ -2,6 +2,7 @@ package com.exam.util;
 
 import javax.servlet.http.HttpServletRequest;
 /**
+ *
  * 检查验证码是否和预期相符
  *
  */

@@ -6,7 +6,13 @@ public class Paper {
     private Integer id;
     private JSONObject content;
     private Integer createuser;
-    private Integer stuid;
+    private Integer classid; //考试班级
+    private Integer singlescore;
+    private Integer multiplescore;
+    private String startTime; //生成时间
+    private String endTime; // 结束时间
+    private Integer keepTime; // 持续时间
+
 
     public Integer getId() {
         return id;
@@ -32,14 +38,53 @@ public class Paper {
         this.createuser = createuser;
     }
 
-    public Integer getStuid() {
-        return stuid;
+    public Integer getClassid() {
+        return classid;
     }
 
-    public void setStuid(Integer stuid) {
-        this.stuid = stuid;
+    public void setClassid(Integer classid) {
+        this.classid = classid;
     }
 
+    public Integer getSinglescore() {
+        return singlescore;
+    }
+
+    public void setSinglescore(Integer singlescore) {
+        this.singlescore = singlescore;
+    }
+
+    public Integer getMultiplescore() {
+        return multiplescore;
+    }
+
+    public void setMultiplescore(Integer multiplescore) {
+        this.multiplescore = multiplescore;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public Integer getKeepTime() {
+        return keepTime;
+    }
+
+    public void setKeepTime(Integer keepTime) {
+        this.keepTime = keepTime;
+    }
 
     @Override
     public String toString() {
@@ -47,7 +92,12 @@ public class Paper {
                 "id=" + id +
                 ", content=" + content +
                 ", createuser=" + createuser +
-                ", stuid=" + stuid +
+                ", classid=" + classid +
+                ", singlescore=" + singlescore +
+                ", multiplescore=" + multiplescore +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", keepTime=" + keepTime +
                 '}';
     }
 }

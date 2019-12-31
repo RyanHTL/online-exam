@@ -1,0 +1,123 @@
+package com.exam.demain;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.ctc.wstx.util.StringUtil;
+import com.sun.deploy.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+
+/**
+ * @author ：kj
+ * @description：试题的类
+ * @date ：2019/12/28 19:39
+ */
+public class Test {
+    private int id;
+    private String title;
+    private String selectA;
+    private String selectB;
+    private String selectC;
+    private String selectD;
+    private String selectE;
+    private String anwser;
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSelectA() {
+        return selectA;
+    }
+
+    public void setSelectA(String selectA) {
+        this.selectA = selectA;
+    }
+
+    public String getSelectB() {
+        return selectB;
+    }
+
+    public void setSelectB(String selectB) {
+        this.selectB = selectB;
+    }
+
+    public String getSelectC() {
+        return selectC;
+    }
+
+    public void setSelectC(String selectC) {
+        this.selectC = selectC;
+    }
+
+    public String getSelectD() {
+        return selectD;
+    }
+
+    public void setSelectD(String selectD) {
+        this.selectD = selectD;
+    }
+
+    public String getSelectE() {
+        return selectE;
+    }
+
+    public void setSelectE(String selectE) {
+        this.selectE = selectE;
+    }
+
+    public void setAnwser(String anwser) {
+        this.anwser = anwser;
+    }
+
+    public String getAnwser() {
+        return anwser;
+    }
+
+    public String toJsonString() {
+        return com.alibaba.fastjson.JSON.toJSONString(this);
+    }
+
+    public String toJsonString2(){
+        String str = "{'id': '%s', 'type': '%s', 'title': '%s', 'answer': %s, 'choose': {'A': '%s', 'B': '%s', 'C': '%s', 'D': '%s', 'E': '%s'}}";
+
+        String[] strings = this.getAnwser().split(",");
+        String sss ="";
+        int i = 0;
+
+        for(String a: strings){
+
+            sss+="'answer"+(i+1)+"':'"+a+"',";
+            i++;
+            if (i==(strings.length)){
+                sss = sss.substring(0,sss.lastIndexOf(","));
+            }
+
+        }
+        sss  = "{"+sss+"}";
+        System.out.println("--"+sss);
+
+        if (this.getAnwser().length()>1)System.out.println(sss);
+
+
+        return String.format(str,String.valueOf(this.getId()),"abc",this.getTitle(),sss.toString(),this.getSelectA(),this.getSelectB()
+                ,this.getSelectC(),this.getSelectD(),this.getSelectE());
+    }
+}
