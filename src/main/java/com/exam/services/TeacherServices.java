@@ -32,7 +32,8 @@ public interface TeacherServices {
     // 添加试卷
     int addParper(TestPaper testPaper);
 
-    int addParperToStatus(int id,int classid,int status);
+
+    int addParperToStatus(int teacherid,int coursed, int testid,int classid,int status,String starttime, String endtime,String keeptime);
 
     // 查询所有题库
     List<Question> selectAllQuestions(int createUserid);

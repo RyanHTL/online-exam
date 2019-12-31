@@ -18,7 +18,7 @@ public class PaperServices {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
         ParperServices services = (ParperServices) context.getBean("parperServices");
 
-        ArrayList<Question> questions = services.getQuestions(15);
+        ArrayList<Question> questions = services.getQuestionsAndAnswers(20);
         System.out.println("questions = "+questions.toString());
     }
 
@@ -31,8 +31,8 @@ public class PaperServices {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
         ParperServices services = (ParperServices) context.getBean("parperServices");
 
-        ArrayList<String> answers = services.getAnswersToParper(15);
-        System.out.println("answers="+answers.toString());
+        ArrayList<String> answers = services.getAnswersToParper(22);
+        System.out.println("answers="+answers.get(0)+" "+answers.get(1)+" "+answers.get(2)+" "+answers.get(3));
     }
 
     @Test

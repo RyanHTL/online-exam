@@ -15,6 +15,7 @@ public class Question {
     private String title;
     private Map<String, String> choosees;
     private ArrayList<String> answer;
+    private String answerstring;
     private int Score;
     private String leve;
     private String section;
@@ -49,6 +50,14 @@ public class Question {
 
     public void setScore(int score) {
         Score = score;
+    }
+
+    public String getAnswerstring() {
+        return answerstring;
+    }
+
+    public void setAnswerstring(String answerstring) {
+        this.answerstring = answerstring;
     }
 
     public Map<String, String> getChoosees() {
@@ -92,6 +101,7 @@ public class Question {
                 ", title='" + title + '\'' +
                 ", choosees=" + choosees +
                 ", answer=" + answer +
+                ", answerstring='" + answerstring + '\'' +
                 ", Score=" + Score +
                 ", leve='" + leve + '\'' +
                 ", section='" + section + '\'' +

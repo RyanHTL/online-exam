@@ -15,6 +15,10 @@ public interface ParperServices {
     // 获得指定试卷的所有答案
     ArrayList<String> getAnswersToParper(Integer paperid);
 
+    // 获取指定试卷的所有问题包含答案
+    ArrayList<Question> getQuestionsAndAnswers(Integer paperid);
+
+
 
 
 }

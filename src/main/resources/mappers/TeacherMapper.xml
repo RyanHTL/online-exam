@@ -7,12 +7,12 @@
 
     <insert id="addQuestions"></insert>
     <insert id="addParper" parameterType="com.exam.demain.TestPaper" keyProperty="id" useGeneratedKeys="true">
-       INSERT INTO testpaper (content,courseid,createuser)
-        values (#{testPaper.content},#{testPaper.courseid},#{testPaper.createuser})
+       INSERT INTO testpaper (title,content,courseid,createuser,singlescore,multiplescore)
+        values (#{testPaper.title},#{testPaper.content},#{testPaper.courseid},#{testPaper.createuser},#{testPaper.singlescore},#{testPaper.multiplescore})
     </insert>
     <insert id="addParperToStatus" >
-       INSERT INTO teststatus(testpaperid,classid,`status`)
-        values (#{id},#{classid},#{status})
+       INSERT INTO subscription(teacherid,coursed,testid,classid,status,starttime,endtime,keeptime)
+        values (#{teacherid},#{coursed},#{testid},#{classid},#{status},#{starttime},#{endtime},#{keeptime})
     </insert>
 
 

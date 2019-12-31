@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class Paper {
     private Integer id;
+    private String title;
     private JSONObject content;
     private Integer createuser;
     private Integer classid; //考试班级
@@ -86,10 +87,19 @@ public class Paper {
         this.keepTime = keepTime;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "Paper{" +
                 "id=" + id +
+                ", title='" + title + '\'' +
                 ", content=" + content +
                 ", createuser=" + createuser +
                 ", classid=" + classid +

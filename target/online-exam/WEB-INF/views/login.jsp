@@ -54,7 +54,6 @@
     </div>
     <!-- 全局js -->
     <script src="../../resources/js/jquery-3.4.1.min.js"></script>
-    <script src="../../resources/js/jquery.min.js?v=2.1.4"></script>
     <script src="../../resources/js/bootstrap.min.js"></script>
     <script>
         var basePath = "${pageContext.request.contextPath}/";
@@ -76,7 +75,7 @@
                 // alert(verifyCodeActual);
                 $.ajax({
                     url: '${pageContext.request.contextPath}/loginController/checklogin',
-                    type: 'POST',
+                    type: 'post',
                     dataType:"json",
                     data:data,
                     success: function (data) {

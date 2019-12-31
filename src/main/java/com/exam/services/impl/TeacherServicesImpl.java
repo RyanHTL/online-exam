@@ -3,6 +3,7 @@ package com.exam.services.impl;
 import com.exam.dao.TeacherDao;
 import com.exam.demain.*;
 import com.exam.services.TeacherServices;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,8 +56,8 @@ public class TeacherServicesImpl implements TeacherServices {
     }
 
     @Override
-    public int addParperToStatus(int id, int classid, int status) {
-        return dao.addParperToStatus(id,classid,status);
+    public int addParperToStatus(int teacherid,int coursed, int testid,int classid,int status,String starttime, String endtime,String keeptime) {
+        return dao.addParperToStatus(teacherid,coursed,testid,classid,status,starttime,endtime,keeptime);
     }
 
 

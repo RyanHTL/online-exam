@@ -12,11 +12,24 @@ public interface StudentDao {
     Student checkUser(@Param("account") String account, @Param("password") String password);
 
     // 查询学生的所有考试试卷
-    List<Paper> selectAllPaperByStuid(int studentid);
+    List<Paper> selectAllPaperByClassid(int classid);
 
     // 查询试卷（考试结果）
     Paper selectMyResultPaper(int paperid);
 
     // 获取单元测试题
     List<Question> selectUnitTestQuestions(String type);
+
+    // 插入提交信息
+    int insetsubmitinfo(@Param("content") String content,
+                        @Param("grade") int grade,
+                        @Param("studentid") int studentid,
+                        @Param("paperid") int paperid,
+                        @Param("submittime") String submittime);
+
+    int updatePaperStatusToStop(@Param("paperid") int paperid);
+
+
+
+
 }

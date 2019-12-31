@@ -69,7 +69,7 @@ public class ParperUtil {
             q.setScore(score);
             questions.add(q);
         }
-        System.out.println(questions.toString());
+        System.out.println("PaperUtil.questionsByType =>"+questions.toString());
 
         return questions;
 
@@ -102,6 +102,7 @@ public class ParperUtil {
                 JSONObject object = object2.getJSONObject(i);
                 JSONObject an = object.getJSONObject("answer");
                 Iterator iter = an.entrySet().iterator();
+                System.out.println(an);
                 String ans = "";
                 while (iter.hasNext()) {
                     Map.Entry entry = (Map.Entry) iter.next();
@@ -111,9 +112,86 @@ public class ParperUtil {
             }
         }
 
-        System.out.println(answer.toString());
+        System.out.println("PaperUtil.answersBytype =>"+answer.toString());
 
         return answer;
+
+    }
+
+    public ArrayList<Question> getQuestionsAndAnswers(Paper paper, String type,int score) {
+
+        JSONObject object1 = paper.getContent().getJSONObject("content");
+        ArrayList<Question> questions = new ArrayList<>();
+        //System.out.println(object1);
+
+        // 解析json
+        JSONArray object2 = object1.getJSONArray(type);
+
+        //System.out.println(object2);
+        for (int i = 0; i < object2.size(); i++) {
+            Question q = new Question();
+            JSONObject object = object2.getJSONObject(i);
+            // 考题id
+            q.setTitle(object.getString("title"));
+            q.setId(Integer.parseInt(object.getString("id")));
+            if(type.equals("single"))
+                q.setType(0);
+            else
+                q.setType(1);
+            /**
+             * 解析选项
+             * "choose": {
+             *     "a": "a1",
+             *     "a1": "a1",
+             *     "a2": "a1",
+             *     "a3": "a1"
+             *   }
+             */
+            JSONObject ch = object.getJSONObject("choose");
+            Map<String, String> choose = new HashMap<>();
+            Iterator iter2 = ch.entrySet().iterator();
+            while (iter2.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter2.next();
+                choose.put(entry.getKey().toString(), entry.getValue().toString());
+                //System.out.println(entry.getKey().toString());
+                //System.out.println(entry.getValue().toString());
+            }
+
+            ArrayList<String> answer = new ArrayList<>();
+            JSONObject an = object.getJSONObject("answer");
+            if (type.equals("single")) {
+                for (int j = 0; j < object2.size(); j++) {
+                    Iterator iter = an.entrySet().iterator();
+                    while (iter.hasNext()) {
+                        Map.Entry entry = (Map.Entry) iter.next();
+                        answer.add(entry.getValue().toString());
+                        q.setAnswerstring(entry.getValue().toString());
+                    }
+
+                }
+            } else if (type.equals("multiple")) {
+                for (int j = 0; j < object2.size(); j++) {
+                    Iterator iter = an.entrySet().iterator();
+                    String ans = "";
+                    while (iter.hasNext()) {
+                        Map.Entry entry = (Map.Entry) iter.next();
+                        ans += entry.getValue().toString();
+                    }
+                    answer.add(ans);
+                    q.setAnswerstring(ans);
+                }
+            }
+
+            q.setAnswer(answer);
+            q.setChoosees(choose);
+            q.setScore(score);
+            questions.add(q);
+        }
+
+
+        System.out.println("PaperUtil.getQuestionsAndAnswers =>"+questions.toString());
+
+        return questions;
 
     }
 

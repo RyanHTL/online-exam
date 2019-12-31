@@ -13,14 +13,23 @@
         <result column="className" property="className"/>
         <result column="phone" property="phone"/>
     </resultMap>
+    <insert id="insetsubmitinfo">
+        INSERT INTO testrecords(content,grade,sutdentid,testpaperid,submittime)
+        VALUES(#{content},#{grade},#{studentid},#{paperid},#{submittime})
+    </insert>
+    <update id="updatePaperStatusToStop">
+        UPDATE subscription SET `status` = 0 WHERE testid = #{paperid}
+    </update>
 
 
     <select id="checkUser" resultMap="StuResultMap">
         select * from user_info u JOIN clazz c ON c.Id = u.classid where account =#{account} and password = #{password}
     </select>
 
-    <select id="selectAllPaperByStuid" resultType="com.exam.demain.Paper">
-
+    <select id="selectAllPaperByClassid" resultType="com.exam.demain.Paper">
+        SELECT t.* FROM testpaper t
+            JOIN subscription s ON t.id = s.testid
+            WHERE `status` = 1 AND classid = #{classid}
     </select>
 
     <select id="selectMyResultPaper" resultType="com.exam.demain.Paper">

@@ -72,4 +72,18 @@ public class ParperServicesImpl implements ParperServices {
         return answers1;
     }
 
+    @Override
+    public ArrayList<Question> getQuestionsAndAnswers(Integer paperid) {
+        Paper paper = dao.selectPaper(paperid);
+        ParperUtil util = new ParperUtil();
+        ArrayList<Question> question1;
+        ArrayList<Question> question2;
+        String type1 = "single";
+        question1 = util.getQuestionsAndAnswers(paper, type1,paper.getSinglescore());
+        String type2 = "multiple";
+        question2 = util.getQuestionsAndAnswers(paper, type2,paper.getMultiplescore());
+        question1.addAll(question2);
+        return question1;
+    }
+
 }

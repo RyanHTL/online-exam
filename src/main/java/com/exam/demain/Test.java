@@ -104,7 +104,7 @@ public class Test {
 
         for(String a: strings){
 
-            sss+="'answer"+(i+1)+"':'"+a+"',";
+            sss+= "'"+(i+1)+"':'"+a+"',";
             i++;
             if (i==(strings.length)){
                 sss = sss.substring(0,sss.lastIndexOf(","));

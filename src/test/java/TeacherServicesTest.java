@@ -19,8 +19,8 @@ public class TeacherServicesTest {
     public void createPaper() {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
         TeacherServices services = (TeacherServices) context.getBean("teacherServices");
-        int single = 5;
-        int multiple = 5;
+        int single = 2;
+        int multiple = 2;
         Map<Integer, com.exam.demain.Test> a;
         do {
             a = services.findResultByRule(single, multiple);
@@ -46,11 +46,16 @@ public class TeacherServicesTest {
         System.out.println(str3);
         JSONObject content = JSONObject.parseObject(str3);
         TestPaper testPaper = new TestPaper();
+        testPaper.setTitle("java测试");
         testPaper.setContent(content.toJSONString());
         testPaper.setCourseid(1351556);
         testPaper.setCreateuser(13215);
         testPaper.setStatus(1);
+        testPaper.setSinglescore(2);
+        testPaper.setMultiplescore(2);
         services.addParper(testPaper);
+        services.addParperToStatus(1, 1, testPaper.getId(),1,1,"2019-12-28 01:58:09","2019-12-28 01:58:09","3600");
+
         System.out.println(testPaper.getId());
 
     }

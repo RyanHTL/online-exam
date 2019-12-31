@@ -13,6 +13,7 @@
 
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@page import="java.util.List"%>
+    <%@ page import="com.exam.demain.Student" %>
 
     <title> - 数据表格</title>
     <meta name="keywords" content="">
@@ -34,7 +35,7 @@
 
 </head>
 <body>
-<div class=" col-md-10 col-md-push-1" style="text-align: center;"><h2>java测试题二</h2></div>
+<div class=" col-md-10 col-md-push-1" style="text-align: center;" id="title"><h2>java测试题二</h2></div>
 <div style="text-align: center;">
     <div class="col-md-10 col-md-push-1" style="font-size: 20px;">
         <small id="sum">试卷总分：</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>考试试卷：30分钟</small>
@@ -47,85 +48,41 @@
         <form method="post">
             <div class="row"><h3>一、选择题</h3>
                 <div class="bk" id="single">
-<%--                    <c:forEach items="${questions}" var="question" varStatus="id">--%>
-<%--                        <c:if test="${q.type==0}">--%>
-<%--                            <h5>--%>
-<%--                                <p>${id.index}、${question.title}</p></br>--%>
 
-<%--                            </h5>--%>
-<%--                            </br>--%>
-<%--                        </c:if>--%>
-<%--                    </c:forEach>--%>
-<%--                        <p><%="="+request.getAttribute("questions")%></p>--%>
-<%--                        <p>${questions}</p>--%>
-<%--                    <h5>--%>
-<%--                        <p>1、在边界值分析中，哪个数据通常不用来做数据测试</p></br>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx2" type="radio" value="1" />&nbsp;A、</label>1</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx2" type="radio" value="2" />&nbsp;B、</label>2</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx2" type="radio" value="3" />&nbsp;C、</label>3</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx2" type="radio" value="4" />&nbsp;D、</label>4</div>--%>
-<%--                    </h5>--%>
-<%--                    </br>--%>
-<%--                    <h5>--%>
-<%--                        <p>1、在边界值分析中，哪个数据通常不用来做数据测试</p></br>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx3" type="radio" value="1" />&nbsp;A、</label>1</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx3" type="radio" value="2" />&nbsp;B、</label>2</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx3" type="radio" value="3" />&nbsp;C、</label>3</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dx3" type="radio" value="4" />&nbsp;D、</label>4</div>--%>
-<%--                    </h5>--%>
-<%--                    </br>--%>
                 </div>
             </div>
             <div class="row"><h3>二、多选题</h3>
                 <div class="bk" id="mul">
-<%--                    <h5>--%>
-<%--                        <p>1、遇有（ ）或风力在5级及以上恶劣天气时，一般不进行V形天窗作业。若必须利用 V形天窗进行检修和故障处理或事故抢修时，应增设接地线，并在加强监护的情况下方准作业。</p></br>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux1" type="checkbox" value="雨" />&nbsp;A、</label>雨</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux1" type="checkbox" value="雪" />&nbsp;B、</label>雪</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux1" type="checkbox" value="雾" />&nbsp;C、</label>雾</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux1" type="checkbox" value="较热天气" />&nbsp;D、</label>较热天气</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux1" type="checkbox" value="炎热天气" />&nbsp;E、</label>炎热天气</div>--%>
-<%--                    </h5>--%>
-<%--                    </br>--%>
-<%--                    <h5>--%>
-<%--                        <p>1、遇有（ ）或风力在5级及以上恶劣天气时，一般不进行V形天窗作业。若必须利用 V形天窗进行检修和故障处理或事故抢修时，应增设接地线，并在加强监护的情况下方准作业。</p></br>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux2" type="checkbox" value="雨" />&nbsp;A、</label>雨</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux2" type="checkbox" value="雪" />&nbsp;B、</label>雪</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux2" type="checkbox" value="雾" />&nbsp;C、</label>雾</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux2" type="checkbox" value="较热天气" />&nbsp;D、</label>较热天气</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux2" type="checkbox" value="炎热天气" />&nbsp;E、</label>炎热天气</div>--%>
-<%--                    </h5>--%>
-<%--                    </br>--%>
-<%--                    <h5>--%>
-<%--                        <p>1、遇有（ ）或风力在5级及以上恶劣天气时，一般不进行V形天窗作业。若必须利用 V形天窗进行检修和故障处理或事故抢修时，应增设接地线，并在加强监护的情况下方准作业。</p></br>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux3" type="checkbox" value="雨" />&nbsp;A、</label>雨</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux3" type="checkbox" value="雪" />&nbsp;B、</label>雪</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux3" type="checkbox" value="雾" />&nbsp;C、</label>雾</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux3" type="checkbox" value="较热天气" />&nbsp;D、</label>较热天气</div>--%>
-<%--                        <div>&nbsp;&nbsp;<label><input name="dux3" type="checkbox" value="炎热天气" />&nbsp;E、</label>炎热天气</div>--%>
-<%--                    </h5>--%>
-<%--                    </br>--%>
 
                 </div>
             </div>
             <div style="text-align: center;">
-                <input type="submit" value="提交" class="btn btn-success">
+                <input type="button" onclick="getanswer()" value="提交" class="btn btn-success">
             </div>
         </form>
     </div>
 </div>
 <div class="row" style="height: 150px;"></div>
 <!-- 全局js -->
-<script src="../../resources/js/jquery.min.js?v=2.1.4"></script>
+<script src="../../resources/js/jquery-3.4.1.min.js"></script>
 <script src="../../resources/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="../../resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="../../resources/js/plugins/layer/layer.min.js"></script>
 
+
+<script>
+    <% Student loginuser = (Student)request.getSession().getAttribute("loginuser");
+        System.out.println("testing user =>"+loginuser.toString());
+    %>
+</script>
 <script>
 
+    var n =0;
+    var m =0;
+    var id = '${paper}';
     $(function () {
-        var id = '${paper}';
+
         // alert(id);
         var html = '';
         $.ajax({
@@ -137,6 +94,7 @@
                 console.log(data);
 
                 var sum = 0;
+
                 for (var j =0; j<data.length;j++){
                     var i = j+1;
                     var sum = sum + Number(data[j].score);
@@ -144,23 +102,26 @@
                     if(data[j].type === 0){
                         $("#single").append(
                             "<h5> <p>" + i + "、" + data[j].title + "</p></br>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='radio' value='A'/>&nbsp;A、</label>" + data[j].choosees.A + "</div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='radio' value='B'/>&nbsp;B、</label>" + data[j].choosees.B + "</div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='radio' value='C'/>&nbsp;C、</label>" + data[j].choosees.C + "</div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='radio' value='D '/>&nbsp;D、</label>" + data[j].choosees.D + "</div>" +
+                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='A'/>&nbsp;A、" + data[j].choosees.A + "</label></div>" +
+                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='B'/>&nbsp;B、" + data[j].choosees.B + "</label></div>" +
+                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='C'/>&nbsp;C、" + data[j].choosees.C + "</label></div>" +
+                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='D '/>&nbsp;D、" + data[j].choosees.D + "</label></div>" +
                             "</h5></br>"
                         );
+                        m+=1;
                     }
                     else if(data[j].type === 1){
+
                         $("#mul").append(
                             "<h5> <p>" + i + "、" + data[j].title + "</p></br>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='checkbox' value='A'/>&nbsp;A、</label>" + data[j].choosees.A + "</div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='checkbox' value='B'/>&nbsp;B、</label>" + data[j].choosees.B + "</div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='checkbox' value='C'/>&nbsp;C、</label>" + data[j].choosees.C + "</div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='checkbox' value='D'/>&nbsp;D、</label>" + data[j].choosees.D + "</div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dx3' type='checkbox' value='E'/>&nbsp;D、</label>" + data[j].choosees.E + "</div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='A'/>&nbsp;A、" + data[j].choosees.A + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='B'/>&nbsp;B、" + data[j].choosees.B + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='C'/>&nbsp;C、" + data[j].choosees.C + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='D'/>&nbsp;D、" + data[j].choosees.D + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='E'/>&nbsp;D、" + data[j].choosees.E + "</label></div>" +
                             "</h5></br>"
                         );
+                        n+=1;
                     }
                 }
                 $("#sum").append(sum);
@@ -174,6 +135,46 @@
 
     });
 
+    function getanswer() {
+        var ans = {};
+        var index = 1;
+        for (var o = 0; o <= n; o++) {
+            var dx = $('input[name="dx' + o + '"]:checked').val();
+            ans[index] = dx;
+            index += 1;
+        }
+        for (var i = 0; i < m; i++) {
+            var dxs = document.getElementsByName("dxs" + i);
+            var ss = '';
+            for (j in dxs) {
+                if (dxs[j].checked == true) {
+                    ss = ss + dxs[j].value;
+                }
+            }
+            console.log(index);
+            ans[index-1] = ss;
+            index += 1;
+            ss = '';
+        }
+        ans["studentid"] = <%=loginuser.getId()%>;
+        ans["paperid"] = id;
+        console.log(ans);
+
+        $.ajax({
+            url: '${pageContext.request.contextPath}/studentController/submitanswer',
+            type: 'post',
+            contentType : "application/json;charsetset=UTF-8",//必须
+            dataType:"json",
+            data:JSON.stringify(ans),
+            success: function (data) {
+                alert(data)
+            },
+            error: function (data) {
+                alert("出现错误！")
+            }
+
+        });
+    }
 
 
 </script>

@@ -32,7 +32,16 @@ public interface TeacherDao {
     // 添加试卷
     int addParper(@Param("testPaper")TestPaper testPaper);
 
-    int addParperToStatus(@Param("id") int id,@Param("classid")int classid,@Param("status") int status);
+    int addParperToStatus(
+            @Param("teacherid") int teacherid,
+            @Param("coursed")int coursed,
+            @Param("testid")int testid,
+            @Param("classid")int classid,
+            @Param("status") int status,
+            @Param("starttime") String starttime,
+            @Param("endtime") String endtime,
+            @Param("keeptime") String keeptime
+            );
 
     // 查询所有题库
     List<Question> selectAllQuestions(int createUserid);

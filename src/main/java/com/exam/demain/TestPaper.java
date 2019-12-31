@@ -9,9 +9,12 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class TestPaper {
     private Integer id;
+    private String title;
     private String content;
     private int courseid;
     private int createuser;
+    private Integer singlescore;
+    private Integer multiplescore;
     private int classid;
     private int status;
 
@@ -64,5 +67,33 @@ public class TestPaper {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getSinglescore() {
+        return singlescore;
+    }
+
+    public void setSinglescore(Integer singlescore) {
+        this.singlescore = singlescore;
+    }
+
+    public Integer getMultiplescore() {
+        return multiplescore;
+    }
+
+    public void setMultiplescore(Integer multiplescore) {
+        this.multiplescore = multiplescore;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

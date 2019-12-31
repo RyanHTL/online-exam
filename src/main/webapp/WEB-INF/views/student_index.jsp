@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.exam.demain.Student" %><%--
   Created by IntelliJ IDEA.
   User: 海神阁
   Date: 2019/12/30
@@ -11,11 +11,16 @@
     <title>Title</title>
     <link href="../../resources/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="../../resources/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <script src="../../resources/js/jquery.min.js"></script>
+    <script src="../../resources/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $(".btn").dropdown();
         });
+        <%
+            Student student = (Student) request.getSession().getAttribute("loginuser");
+            System.out.println(student.toString());
+        %>
+
     </script>
     <style>
         .shadow{
@@ -68,36 +73,18 @@
     </div>
     <div class="col-md-10 col-md-push-1">
         <h3 style="border-left: 10px solid #1AB394;">固定试卷</h3>
-        <ul>
-            <li class="shadow col-md-2 " >
-
-                <div style="margin-top: 80px;">
-                    <i class="fa fa-book" style="font-size: 100px;"></i>
-                    <div style="margin-top: 10px; font-size: 16px;">
-                        <span style="float:left">java测试题二</span><br>
-                        <div class="bottom clearfix" style="float:right">
-                            <a href="${pageContext.request.contextPath}/jumpController/testing?id=1">开始做题</a>
-
-                        </div>
-                    </div>
-                </div>
-
-            </li>
-            <li class="shadow col-md-2 " >
-
-                <div style="margin-top: 80px;">
-                    <i class="fa fa-book" style="font-size: 100px;"></i>
-                    <div style="margin-top: 10px; font-size: 16px;">
-                        <span style="float:left">java测试题二</span><br>
-                        <div class="bottom clearfix" style="float:right">
-                            <a href="${pageContext.request.contextPath}/jumpController/testing?id=13">开始做题</a>
-
-                        </div>
-                    </div>
-                </div>
-
-            </li>
-
+        <ul id="paper">
+<%--            <li class="shadow col-md-2 " >--%>
+<%--                <div style="margin-top: 80px;">--%>
+<%--                    <i class="fa fa-book" style="font-size: 100px;"></i>--%>
+<%--                    <div style="margin-top: 10px; font-size: 16px;">--%>
+<%--                        <span style="float:left">java测试题二</span><br>--%>
+<%--                        <div class="bottom clearfix" style="float:right">--%>
+<%--                            <a href="${pageContext.request.contextPath}/jumpController/testing?id=19">开始做题</a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </li>--%>
         </ul>
 
     </div>
@@ -113,7 +100,7 @@
                         <div class="bottom clearfix" style="float:right">
                             <small>2019年1月1日</small><br>
                             <small>2020年1月1日</small><br>
-                            <a href="${pageContext.request.contextPath}/jumpController/testing" style="font-size:16px;">开始做题</a>
+                            <a href="${pageContext.request.contextPath}/jumpController/testing?id=19" style="font-size:16px;">开始做题</a>
 
                         </div>
                     </div>
@@ -129,7 +116,7 @@
                         <div class="bottom clearfix" style="float:right">
                             <small>2019年1月1日</small><br>
                             <small>2020年1月1日</small><br>
-                            <a href="${pageContext.request.contextPath}/jumpController/testing" style="font-size:16px;">开始做题</a>
+                            <a href="${pageContext.request.contextPath}/jumpController/testing?id=20" style="font-size:16px;">开始做题</a>
 
                         </div>
                     </div>
@@ -149,7 +136,7 @@
 
 
 <!-- 全局js -->
-<script src="../../resources/js/jquery.min.js?v=2.1.4"></script>
+<script src="../../resources/js/jquery-3.4.1.min.js"></script>
 <script src="../../resources/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="../../resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -168,6 +155,40 @@
         N.className="active";
 
     }
+
+    $(function () {
+        var html = '';
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/studentController/selectPaper",
+            type: "post",
+            data: {"id": <%=student.getClassid() %>},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+
+                for(var i = 0; i<data.length;i++){
+                    $("#paper").append(
+                        "<li class='shadow col-md-2 ' > " +
+                        "<div style='margin-top: 80px;'>"+
+                        "<i class='fa fa-book' style='font-size: 100px;'></i>"+
+                        "<div style='margin-top: 10px; font-size: 16px;'>"+
+                        "<span style='float:left'>"+data[i].title +"</span><br>"+
+                        "<div class='bottom clearfix' style='float:right'>"+
+                        "<a href='/jumpController/testing?id="+data[i].id+"'>开始做题</a>"+
+                        "</div></div></div></li>"
+
+                    );
+                }
+            },
+            eror: function (dtta) {
+                alert("error")
+            }
+        });
+
+
+
+    })
 
 </script>
 </body>

@@ -1,6 +1,8 @@
 package com.exam.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,7 +41,7 @@ public class JumpController {
     }
 
     @RequestMapping(value = "/testing")
-    public ModelAndView  testing(Integer id ){
+    public ModelAndView testing(Integer id ){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("paper", id);
         modelAndView.setViewName("testing");
