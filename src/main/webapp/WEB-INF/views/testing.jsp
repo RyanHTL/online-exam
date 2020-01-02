@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@page import="java.util.List"%>
+    <%@page import="java.util.List" %>
     <%@ page import="com.exam.demain.Student" %>
 
     <title> - 数据表格</title>
@@ -27,21 +27,20 @@
     <link href="../../resources/css/animate.css" rel="stylesheet">
     <link href="../../resources/css/style.css?v=4.1.0" rel="stylesheet">
     <style>
-        .bk{
+        .bk {
             box-shadow: 2px 2px 3px rgba(150, 149, 150, 0.397);
-            margin-top:20px;
+            margin-top: 20px;
         }
     </style>
 
 </head>
 <body>
-<div class=" col-md-10 col-md-push-1" style="text-align: center;" id="title"><h2>java测试题二</h2></div>
+<div class=" col-md-10 col-md-push-1" style="text-align: center;"><h2 id="title"></h2></div>
 <div style="text-align: center;">
     <div class="col-md-10 col-md-push-1" style="font-size: 20px;">
-        <small id="sum">试卷总分：</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>考试试卷：30分钟</small>
-
+        <small id="sum">试卷总分：</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small id="alltime"></small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small
+            id="timer"></small>
     </div>
-
 </div>
 <div class="row">
     <div class="col-md-10 col-md-push-1">
@@ -75,12 +74,13 @@
     <% Student loginuser = (Student)request.getSession().getAttribute("loginuser");
         System.out.println("testing user =>"+loginuser.toString());
     %>
-</script>
-<script>
 
-    var n =0;
-    var m =0;
+
+    var n = 0;
+    var m = 0;
     var id = '${paper}';
+    var title = '${title}';
+    var keeptime = '${keeptime}';
     $(function () {
 
         // alert(id);
@@ -95,36 +95,36 @@
 
                 var sum = 0;
 
-                for (var j =0; j<data.length;j++){
-                    var i = j+1;
-                    var sum = sum + Number(data[j].score);
+                for (var j = 0; j < data.length; j++) {
+                    var i = j + 1;
+                    sum = sum + Number(data[j].score);
 
-                    if(data[j].type === 0){
+                    if (data[j].type === 0) {
                         $("#single").append(
                             "<h5> <p>" + i + "、" + data[j].title + "</p></br>" +
-                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='A'/>&nbsp;A、" + data[j].choosees.A + "</label></div>" +
-                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='B'/>&nbsp;B、" + data[j].choosees.B + "</label></div>" +
-                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='C'/>&nbsp;C、" + data[j].choosees.C + "</label></div>" +
-                                "<div>&nbsp;&nbsp;<label><input name='dx"+m+"' type='radio' value='D '/>&nbsp;D、" + data[j].choosees.D + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dx" + m + "' type='radio' value='A'/>&nbsp;A、" + data[j].choosees.A + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dx" + m + "' type='radio' value='B'/>&nbsp;B、" + data[j].choosees.B + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dx" + m + "' type='radio' value='C'/>&nbsp;C、" + data[j].choosees.C + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dx" + m + "' type='radio' value='D '/>&nbsp;D、" + data[j].choosees.D + "</label></div>" +
                             "</h5></br>"
                         );
-                        m+=1;
-                    }
-                    else if(data[j].type === 1){
+                        m += 1;
+                    } else if (data[j].type === 1) {
 
                         $("#mul").append(
                             "<h5> <p>" + i + "、" + data[j].title + "</p></br>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='A'/>&nbsp;A、" + data[j].choosees.A + "</label></div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='B'/>&nbsp;B、" + data[j].choosees.B + "</label></div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='C'/>&nbsp;C、" + data[j].choosees.C + "</label></div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='D'/>&nbsp;D、" + data[j].choosees.D + "</label></div>" +
-                            "<div>&nbsp;&nbsp;<label><input name='dxs"+n+"' type='checkbox' value='E'/>&nbsp;D、" + data[j].choosees.E + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs" + n + "' type='checkbox' value='A'/>&nbsp;A、" + data[j].choosees.A + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs" + n + "' type='checkbox' value='B'/>&nbsp;B、" + data[j].choosees.B + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs" + n + "' type='checkbox' value='C'/>&nbsp;C、" + data[j].choosees.C + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs" + n + "' type='checkbox' value='D'/>&nbsp;D、" + data[j].choosees.D + "</label></div>" +
+                            "<div>&nbsp;&nbsp;<label><input name='dxs" + n + "' type='checkbox' value='E'/>&nbsp;D、" + data[j].choosees.E + "</label></div>" +
                             "</h5></br>"
                         );
-                        n+=1;
+                        n += 1;
                     }
                 }
                 $("#sum").append(sum);
+                $("#title").append(title);
 
             },
 
@@ -152,7 +152,7 @@
                 }
             }
             console.log(index);
-            ans[index-1] = ss;
+            ans[index - 1] = ss;
             index += 1;
             ss = '';
         }
@@ -163,11 +163,12 @@
         $.ajax({
             url: '${pageContext.request.contextPath}/studentController/submitanswer',
             type: 'post',
-            contentType : "application/json;charsetset=UTF-8",//必须
-            dataType:"json",
-            data:JSON.stringify(ans),
+            contentType: "application/json;charsetset=UTF-8",//必须
+            dataType: "json",
+            data: JSON.stringify(ans),
             success: function (data) {
-                alert(data)
+                alert("得分："+data);
+                window.location.href = "${pageContext.request.contextPath}/jumpController/student_index";
             },
             error: function (data) {
                 alert("出现错误！")
@@ -177,6 +178,33 @@
     }
 
 
+    //    倒计时
+
+    console.log(keeptime);
+    var oBox = document.getElementById('timer');
+    var allTime = document.getElementById('alltime');
+    var maxtime = Number(keeptime);
+    // 初始化总时长
+    allTime.innerHTML = "考试时间：" + Math.floor(maxtime / 60) + "分钟";
+
+    function CountDown() {
+        if (maxtime >= 0) {
+            minutes = Math.floor(maxtime / 60);
+            seconds = Math.floor(maxtime % 60);
+            msg = "距离结束还有" + minutes + "分" + seconds + "秒";
+            oBox.innerHTML = msg;
+            if (maxtime == 5 * 60 + 57) alert("还剩5分钟");
+            --maxtime;
+        } else {
+            clearInterval(timer);
+            alert("时间到，结束!");
+            getanswer();
+        }
+    }
+
+    timer = setInterval("CountDown()", 1000);
+
+
 </script>
 </body>
-</html>
+< /html>

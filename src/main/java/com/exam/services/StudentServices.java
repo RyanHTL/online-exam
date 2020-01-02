@@ -2,6 +2,8 @@ package com.exam.services;
 
 import com.exam.demain.Paper;
 import com.exam.demain.Question;
+import com.exam.demain.ResultPaper;
+import com.exam.demain.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +18,15 @@ public interface StudentServices {
     int submitParper(int studentid,int paperid,ArrayList<String> answers,String time);
 
     // 查询试卷（考试结果）
-    Paper selectMyPaper(int stuid, int paperid);
+    List<ResultPaper> selectMySubPaper(int stuid);
+
+    ResultPaper selectMySubPaperBypaperid(int paperid);
 
     // 获取单元测试题
     List<Question> selectUnitTestQuestions(String type);
 
+    Integer updateUserInfo(Student student);
+
+    Student selectUserByid(int id);
 
 }

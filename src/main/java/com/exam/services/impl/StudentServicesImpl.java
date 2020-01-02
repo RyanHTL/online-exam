@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.exam.dao.StudentDao;
 import com.exam.demain.Paper;
 import com.exam.demain.Question;
+import com.exam.demain.ResultPaper;
+import com.exam.demain.Student;
 import com.exam.services.ParperServices;
 import com.exam.services.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,12 +62,27 @@ public class StudentServicesImpl implements StudentServices {
     }
 
     @Override
-    public Paper selectMyPaper(int stuid, int paperid) {
-        return null;
+    public List<ResultPaper> selectMySubPaper(int stuid) {
+        return dao.selectMyResultPaper(stuid);
+    }
+
+    @Override
+    public ResultPaper selectMySubPaperBypaperid(int paperid) {
+        return dao.selectMySubPaperBypaperid(paperid);
     }
 
     @Override
     public List<Question> selectUnitTestQuestions(String type) {
         return null;
+    }
+
+    @Override
+    public Integer updateUserInfo(Student student) {
+        return dao.updateUserInfo(student);
+    }
+
+    @Override
+    public Student selectUserByid(int id) {
+        return dao.selectUserByid(id);
     }
 }

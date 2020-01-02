@@ -49,7 +49,7 @@
                     </div>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="index_v1.html">
+                    <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/empty">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">主页</span>
                     </a>
@@ -67,7 +67,11 @@
                         <li>
                             <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/studenttable">查看学生</a>
                         </li>
-
+                    </ul>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/paperlist">学生成绩管理</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -79,17 +83,22 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="words.html">查看题库</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/words">查看题库</a>
                         </li>
 
                     </ul>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="read_over.html">批改考题</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/singel">上传题库</a>
                         </li>
-
+                    </ul>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/jumpController/paperlist">查看试卷</a>
+                        </li>
                     </ul>
                 </li>
+
 
             </ul>
         </div>
@@ -100,7 +109,7 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                    <form role="search" class="navbar-form-custom" method="post" action="#">
                         <div class="form-group">
                             <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
                         </div>
@@ -108,7 +117,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle count-info J_menuItem" data-toggle="dropdown" href="mannger.html">
+                        <a class="dropdown-toggle count-info J_menuItem" data-toggle="dropdown" href="#">
                             <i class="fa fa-envelope">个人信息</i>
                         </a>
                     </li>
@@ -117,7 +126,7 @@
             </nav>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe id="J_iframe" width="100%" height="100%" src="index_v1.html" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            <iframe id="J_iframe" width="100%" height="100%" src="${pageContext.request.contextPath}/jumpController/empty" frameborder="0" data-id="empty" seamless></iframe>
         </div>
     </div>
 

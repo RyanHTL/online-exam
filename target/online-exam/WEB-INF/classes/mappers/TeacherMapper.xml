@@ -2,10 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.exam.dao.TeacherDao">
     <resultMap id="ExamResultMap" type="com.exam.demain.Test"  autoMapping="true"><!-- autoMapping="true" 自动映射（自动忽略下划线） -->
-
+    </resultMap>
+    <resultMap id="PaperResult" type="com.exam.demain.ResultPaper" autoMapping="true">
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="grade" property="score" jdbcType="VARCHAR"/>
+        <result column="stuname" property="studentname" />
+        <result column="content" property="content" typeHandler="com.exam.util.ObjectJsonHandler"/>
+    </resultMap>
+    <resultMap id="paperMap" type="com.exam.demain.Paper" autoMapping="true">
+        <result column="className" property="className"/>
+        <result column="name" property="course"/>
+        <result column="uname" property="createusername"/>
+        <result column="keeptime" property="keepTime"/>
+        <result column="content" property="content" typeHandler="com.exam.util.ObjectJsonHandler"/>
     </resultMap>
 
-    <insert id="addQuestions"></insert>
+    <insert id="addQuestions" >
+        insert into selectquestion(
+        title,selectA,selectB,selectC,selectD,selectE,anwser,courseid
+        )values
+        <foreach collection="list" item="test"  index="index" separator=",">
+        (#{test.title}, #{test.selectA}, #{test.selectB},#{test.selectC},#{test.selectD},#{test.selectE}, #{test.anwser}, #{test.courseid} )
+    </foreach>
+
+
+    </insert>
     <insert id="addParper" parameterType="com.exam.demain.TestPaper" keyProperty="id" useGeneratedKeys="true">
        INSERT INTO testpaper (title,content,courseid,createuser,singlescore,multiplescore)
         values (#{testPaper.title},#{testPaper.content},#{testPaper.courseid},#{testPaper.createuser},#{testPaper.singlescore},#{testPaper.multiplescore})
@@ -17,12 +38,30 @@
 
 
     <update id="updateTeacherInfo"></update>
-    <update id="updateSutdentInfo"></update>
     <update id="updateQuestion"></update>
-    <select id="selectAllStudents" resultType="com.exam.demain.Student"></select>
     <select id="selectStudentInfoByid" resultType="com.exam.demain.Student"></select>
     <select id="selectAllQuestions" resultType="com.exam.demain.Question"></select>
-    <select id="selectAllClazzResultPaper" resultType="com.exam.demain.ResultPaper"></select>
+
+    <select id="selectAllClazzResultPaper" resultMap="PaperResult">
+       SELECT distinct
+	testpaper.id,testpaper.title,testrecords.content,testrecords.grade,course.`name`,testrecords.submittime,
+	user_info.`name` AS stuname,clazz.className
+FROM
+	testrecords
+	JOIN user_info ON user_info.id = testrecords.sutdentid
+	JOIN testpaper ON testpaper.id = testrecords.testpaperid
+	JOIN course ON course.Id = testpaper.courseid
+	JOIN clazz ON clazz.Id =user_info.classid
+WHERE
+	sutdentid IN (
+	SELECT
+		id
+	FROM
+		user_info
+	WHERE
+	user_info.classid IN ( SELECT classid FROM teach_class WHERE teacherid = #{teacherid} )
+	)
+    </select>
     <select id="findResultByRule" resultMap="ExamResultMap" parameterType="com.exam.demain.Test" resultType="java.util.HashMap">
          SELECT * FROM
         (SELECT t1.id,t1.title,t1.selectA,t1.selectB,t1.selectC,t1.selectD,t1.selectE,t1.anwser
@@ -36,4 +75,61 @@
         WHERE t1.id >= t2.id
         ORDER BY t1.id LIMIT #{multiple})t4
     </select>
+    <select id="selectAllPaper" resultMap="paperMap">
+        SELECT testpaper.id,testpaper.title,course.`name`,clazz.className,user_info.`name` AS uname,subscription.keeptime
+            FROM testpaper
+            JOIN subscription ON subscription.testid = testpaper.id
+            JOIN clazz ON clazz.Id = subscription.classid
+            JOIN course ON course.Id = subscription.coursed
+            JOIN user_info ON user_info.id = subscription.teacherid
+            WHERE user_info.id = #{teacherid}
+
+    </select>
+
+
+    <update id="updateSutdentInfo" parameterType="com.exam.demain.Student">
+        update user_info
+        set account=#{list[1]},
+        name=#{list[2]},age=#{list[4]},
+        phone=#{list[5]},sex=#{list[6]}
+        where id=#{list[0]}
+
+   </update>
+    <insert id="insertTest" parameterType="com.exam.demain.Test">
+        insert into selectquestion (title,selectA,selectB,selectC,selectD,selectE,anwser,`type`,courseid)
+        values (#{list[1]},#{list[2]},#{list[3]},#{list[4]},#{list[5]},#{list[6]}, #{list[7]},#{list[8]},#{list[0]})
+
+    </insert>
+    <insert id="insertUser" parameterType="com.exam.demain.Student">
+        insert into user_info (account,`name`,password,age,sex,classid,role,phone)
+        values (#{list[0]},#{list[1]},#{list[2]},#{list[3]},#{list[4]},#{list[5]}, #{list[6]},#{list[7]})
+
+    </insert>
+    <update id="updateAllTest" parameterType="com.exam.demain.Test">
+        UPDATE selectquestion set title=#{list[1]},
+        selectA=#{list[2]},selectB=#{list[3]},selectC=#{list[4]},
+        selectD=#{list[5]},selectE=#{list[6]},anwser=#{list[7]} where id=#{list[0]}
+    </update>
+    <select id="selectAllStudents" resultType="com.exam.demain.Student">
+        SELECT
+	user_info.* ,clazz.className
+FROM
+	user_info
+	JOIN clazz on clazz.Id = user_info.classid
+WHERE
+	user_info.classid IN ( SELECT classid FROM teach_class WHERE teacherid = #{teacherid} )
+ORDER BY
+	classid
+
+    </select>
+    <select id="selectAllTest" resultType="com.exam.demain.Test">
+        SELECT * from selectquestion ,course where selectquestion.courseid=course.id
+
+    </select>
+    <delete id="deleteStudent">
+        DELETE FROM user_info where id=#{id};
+    </delete>
+    <delete id="deleteTest">
+        DELETE FROM selectquestion where id=#{id};
+    </delete>
 </mapper>

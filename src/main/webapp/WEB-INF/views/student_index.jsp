@@ -175,7 +175,7 @@
                         "<div style='margin-top: 10px; font-size: 16px;'>"+
                         "<span style='float:left'>"+data[i].title +"</span><br>"+
                         "<div class='bottom clearfix' style='float:right'>"+
-                        "<a href='/jumpController/testing?id="+data[i].id+"'>开始做题</a>"+
+                        "<a href='/jumpController/testing?id="+data[i].id+"&title="+data[i].title+"&time="+data[i].keepTime+"'>开始做题</a>"+
                         "</div></div></div></li>"
 
                     );
@@ -185,9 +185,6 @@
                 alert("error")
             }
         });
-
-
-
     })
 
 </script>

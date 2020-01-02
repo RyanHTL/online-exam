@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.exam.dao.StudentDao">
+    <resultMap id="PaperResult" type="com.exam.demain.ResultPaper" autoMapping="true">
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="grade" property="score" jdbcType="VARCHAR"/>
+        <result column="content" property="content" typeHandler="com.exam.util.ObjectJsonHandler"/>
+    </resultMap>
     <resultMap id="StuResultMap" type="com.exam.demain.Student"
                autoMapping="true"><!-- autoMapping="true" 自动映射（自动忽略下划线） -->
-        <result column="account" property="account"/>
+        <result column="account" property="account" />
         <result column="name" property="name"/>
         <result column="password" property="password"/>
         <result column="age" property="age"/>
         <result column="sex" property="sex"/>
-        <result column="role" property="role"/>
-        <result column="classid" property="classid"/>
+        <result column="role" property="role" />
+        <result column="classid" property="classid" />
         <result column="className" property="className"/>
         <result column="phone" property="phone"/>
     </resultMap>
+    
+
+
     <insert id="insetsubmitinfo">
         INSERT INTO testrecords(content,grade,sutdentid,testpaperid,submittime)
         VALUES(#{content},#{grade},#{studentid},#{paperid},#{submittime})
     </insert>
     <update id="updatePaperStatusToStop">
         UPDATE subscription SET `status` = 0 WHERE testid = #{paperid}
+    </update>
+    <update id="updateUserInfo">
+        UPDATE user_info  SET account = #{student.account} ,
+        name = #{student.name},
+        password= #{student.password},
+        age= #{student.age},
+        sex= #{student.sex},
+        phone=#{student.phone}
+        WHERE id = #{student.id}
     </update>
 
 
@@ -27,16 +44,33 @@
     </select>
 
     <select id="selectAllPaperByClassid" resultType="com.exam.demain.Paper">
-        SELECT t.* FROM testpaper t
+        SELECT t.*,s.keeptime FROM testpaper t
             JOIN subscription s ON t.id = s.testid
             WHERE `status` = 1 AND classid = #{classid}
     </select>
 
-    <select id="selectMyResultPaper" resultType="com.exam.demain.Paper">
 
+    
+    <select id="selectMyResultPaper" resultMap="PaperResult" >
+        SELECT ts.id,ts.title,res.content,cou.`name`,res.submittime FROM testrecords res
+        JOIN testpaper ts ON ts.id = res.testpaperid
+        JOIN subscription su ON su.testid = ts.id
+        JOIN course cou on cou.Id = su.coursed
+        WHERE res.sutdentid = #{studentid}
     </select>
 
     <select id="selectUnitTestQuestions" resultType="com.exam.demain.Question">
 
+    </select>
+    <select id="selectMySubPaperBypaperid" resultMap="PaperResult">
+        SELECT ts.id,ts.title,res.grade,res.content,cou.`name`,res.submittime FROM testrecords res
+        JOIN testpaper ts ON ts.id = res.testpaperid
+        JOIN subscription su ON su.testid = ts.id
+        JOIN course cou on cou.Id = su.coursed
+        WHERE res.testpaperid = #{paperid}
+
+    </select>
+    <select id="selectUserByid" resultType="com.exam.demain.Student">
+        select * from user_info where id = #{id}
     </select>
 </mapper>

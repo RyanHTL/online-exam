@@ -39,6 +39,7 @@
         }
     </style>
 </head>
+
 <body>
 <!-- 导航栏-->
 <div class="row">
@@ -48,7 +49,7 @@
 
         <div class="col-lg-4 " style="float: right;">
             <ul class="nav nav-pills nav-justified">
-                <li><a href="${pageContext.request.contextPath}/jumpController/student_index" target="_self">首页</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/jumpController/student_index" target="_self">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/jumpController/testresult" target="_self">考试记录</a></li>
                 <li>
                     <div class="btn-group dropdown">
@@ -61,16 +62,12 @@
                             <li><a href="#">退出</a></li>
                         </ul>
                     </div>
-
-
-
                 </li>
             </ul>
         </div>
-
-
     </div>
 </div>
+
 <div class="row" style="margin-top: 50px;">
     <div class="col-md-10 col-md-push-1">
         <div class="col-md-3 shadow" >
@@ -107,11 +104,22 @@
                 </div>
                 <div class="tab-pane" id="self_info">
                     <form class="form-horizontal m-t" style="margin-top: 50px;" id="signupForm">
-
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">*姓名</label>
+                            <label class="col-sm-3 control-label">账号：</label>
+                            <div class="col-sm-8">
+                                <input id="content" name="content" value="<%=stu.getAccount() %>" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*姓名：</label>
                             <div class="col-sm-8">
                                 <input id="usename" name="usename" value="<%=stu.getName() %>" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码：</label>
+                            <div class="col-sm-8">
+                                <input id="password" name="password" value="<%=stu.getPassword() %>" class="form-control" type="password" aria-required="true" aria-invalid="false" class="valid">
                             </div>
                         </div>
                         <div class="form-group">
@@ -130,21 +138,18 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">手机：</label>
                             <div class="col-sm-8">
-                                <input id="tel" name="tel" value="<%=stu.getPhone() %>" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                                <input id="phone" name="phone" value="<%=stu.getPhone() %>" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">班级：</label>
-                            <div class="col-sm-8">
-                                <input id="grade" name="grade" value="<%=stu.getClassName() %>" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
-                            </div>
-                        </div>
-
-
-
+<%--                        <div class="form-group">--%>
+<%--                            <label class="col-sm-3 control-label">班级：</label>--%>
+<%--                            <div class="col-sm-8">--%>
+<%--                                <input id="grade" name="grade" value="<%=stu.getClassName() %>" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
-                                <button class="btn btn-primary" type="submit">提交</button>
+                                <button class="btn btn-primary" type="button" id="saveCustomer">提交</button>
                             </div>
                         </div>
                     </form>
@@ -160,5 +165,40 @@
 <script src="../../resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="../../resources/js/plugins/layer/layer.min.js"></script>
 
+<script>
+
+    $(function (){
+        $("#saveCustomer").click(function (){
+            var user = {
+                id:<%=stu.getId()%>,
+                account : $("#content").val(),
+                name : $("#usename").val(),
+                password : $("#password").val(),
+                age : $("#age").val(),
+                sex : $("#sex").val(),
+                phone : $("#phone").val()
+            };
+            console.log(user);
+            $.ajax({
+                type: "post",
+                url: '${pageContext.request.contextPath}/studentController/updateUserInfo',
+                data: user,
+                async:false,
+                dataType:"json",
+                success: function(data){
+                    alert("--"+data);
+                    window.location.href = "${pageContext.request.contextPath}/jumpController/student_info";
+                },
+                error: function (d) {
+                    alert("error")
+
+                }
+            });
+
+        });
+    })
+
+
+</script>
 </body>
 </html>

@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.exam.demain.Paper;
 import com.exam.demain.Question;
+import com.exam.demain.ResultPaper;
+import com.exam.demain.Student;
 import com.exam.services.ParperServices;
 import com.exam.services.StudentServices;
 import org.apache.ibatis.annotations.Param;
@@ -35,6 +37,17 @@ public class StudentController {
         System.out.println("selectQuestions.paperid=>"+id);
         ArrayList<Question> questions;
         questions = services.getQuestions(id);
+        model.addAttribute("questions",questions);
+        return questions;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/selectQuestionsAndAnswer",method = RequestMethod.POST)
+    public ArrayList<Question> selectQuestionsAndAnswer(@Param("id") Integer id, Model model){
+        //Paper paper = services.selectPaper(id);
+        System.out.println("selectQuestions.paperid=>"+id);
+        ArrayList<Question> questions;
+        questions = services.getQuestionsAndAnswers(id);
         model.addAttribute("questions",questions);
         return questions;
     }
@@ -73,8 +86,43 @@ public class StudentController {
     @RequestMapping(value = "selectPaper", method = RequestMethod.POST)
     public List<Paper> selectPaper(@Param("id") Integer id){
         List<Paper> papers = studentServices.selectAllPaperByClassid(id);
+        System.out.println("selectPaper=>"+papers);
         return papers;
 
+    }
+
+    /**
+     * 根据学生id查提交的试卷
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "selectsubPaper", method = RequestMethod.POST)
+    public List<ResultPaper> selectsubPaper(@Param("id") Integer id){
+        List<ResultPaper> papers = studentServices.selectMySubPaper(id);
+        return papers;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "selectsubPaperOne", method = RequestMethod.POST)
+    public ResultPaper selectsubPaperOne(@Param("id") Integer id){
+        ResultPaper papers = studentServices.selectMySubPaperBypaperid(id);
+        return papers;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "updateUserInfo", method = RequestMethod.POST)
+    public int updateUserInfo(Student user,HttpServletRequest request){
+        System.out.println(user.toString());
+        int i = studentServices.updateUserInfo(user);
+        Student student = null;
+        if (i == 1){
+             student = studentServices.selectUserByid(user.getId());
+             request.getSession().setAttribute("loginuser",student);
+            return i;
+        }else {
+            return 0;
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.exam.demain.Student" %><%--
   Created by IntelliJ IDEA.
   User: 海神阁
   Date: 2019/12/30
@@ -18,24 +18,32 @@
     <link href="../../resources/css/animate.css" rel="stylesheet">
     <link href="../../resources/css/style.css?v=4.1.0" rel="stylesheet">
 
+    <script>
+        <%
+            Student student = (Student) request.getSession().getAttribute("loginuser");
+            System.out.println(student.toString());
+        %>
+    </script>
+
 </head>
 <body>
+<!-- 导航栏-->
 <div class="row">
     <div class="col-md-12 " style="height:80px;">
 
-        <img src="../../resources/image/1.jpg" height="50px;" width="50px;"><small style="font-size: 20px;">在线考</small>
+        <img src="../../resources/image/1.jpg" height="50px;" width="50px;"><small style="font-size: 20px;">在线考试</small>
 
         <div class="col-lg-4 " style="float: right;">
             <ul class="nav nav-pills nav-justified">
-                <li><a href="student_index.html" target="_self">首页</a></li>
-                <li class="active"><a href="testing_record.html" target="_self">考试记录</a></li>
+                <li ><a href="${pageContext.request.contextPath}/jumpController/student_index" target="_self">首页</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/jumpController/testresult" target="_self">考试记录</a></li>
                 <li>
                     <div class="btn-group dropdown">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            个人中心 <span class="caret"></span>
+                            个人中心<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="student_info.html">个人中心</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jumpController/student_info">个人中心</a></li>
 
                             <li><a href="#">退出</a></li>
                         </ul>
@@ -66,21 +74,7 @@
                         <th class="col-md-2"></th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>java测试</td>
-                        <th>java</th>
-                        <th>2019.10.08</th>
-                        <th><a href="test_result.html">查看试卷</a></th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>java测试</td>
-                        <th>java</th>
-                        <th>2019.10.08</th>
-                        <th><a href="test_result.html">查看试卷</a></th>
-                    </tr>
+                    <tbody id="papers">
 
                     </tbody>
 
@@ -114,6 +108,35 @@
     $(function(){
         $(".btn").dropdown();
     });
+
+    $(function () {
+        var html = '';
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/studentController/selectsubPaper",
+            type: "post",
+            data: {"id": <%=student.getId() %>},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+
+                for(var i = 0; i<data.length;i++){
+                    $("#papers").append(
+                        "<tr><td>"+1+"</td><td>"+data[i].title+"</td>"+
+                        "<th>"+data[i].name+"</th>"+
+                        "<th>"+data[i].submittime+"</th>"+
+                        "<th><a href='/jumpController/testingresult?id="+data[i].id+"&title="+data[i].title+"'>查看试卷</a></th>"+
+                        "</tr>"
+                    );
+
+
+                }
+            },
+            eror: function (dtta) {
+                alert("error")
+            }
+        });
+    })
 
 </script>
 </body>

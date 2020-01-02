@@ -15,8 +15,7 @@ import java.util.Map;
  * @description：试题的类
  * @date ：2019/12/28 19:39
  */
-public class Test {
-    private int id;
+public class Test extends Course{
     private String title;
     private String selectA;
     private String selectB;
@@ -24,7 +23,23 @@ public class Test {
     private String selectD;
     private String selectE;
     private String anwser;
+    private Integer type;
+    private Integer courseid;
+    public Integer getCourseid() {
+        return courseid;
+    }
 
+    public void setCourseid(Integer courseid) {
+        this.courseid = courseid;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
 
     public int getId() {
@@ -89,6 +104,24 @@ public class Test {
 
     public String getAnwser() {
         return anwser;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", selectA='" + selectA + '\'' +
+                ", selectB='" + selectB + '\'' +
+                ", selectC='" + selectC + '\'' +
+                ", selectD='" + selectD + '\'' +
+                ", selectE='" + selectE + '\'' +
+                ", anwser='" + anwser + '\'' +
+                ", type=" + type +
+                ", courseid=" + courseid +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public String toJsonString() {

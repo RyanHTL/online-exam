@@ -7,7 +7,10 @@ public class Paper {
     private String title;
     private JSONObject content;
     private Integer createuser;
+    private String createusername;
     private Integer classid; //考试班级
+    private String className; //考试班级
+    private String course; //考试班级
     private Integer singlescore;
     private Integer multiplescore;
     private String startTime; //生成时间
@@ -21,6 +24,14 @@ public class Paper {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public JSONObject getContent() {
@@ -39,12 +50,36 @@ public class Paper {
         this.createuser = createuser;
     }
 
+    public String getCreateusername() {
+        return createusername;
+    }
+
+    public void setCreateusername(String createusername) {
+        this.createusername = createusername;
+    }
+
     public Integer getClassid() {
         return classid;
     }
 
     public void setClassid(Integer classid) {
         this.classid = classid;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
     }
 
     public Integer getSinglescore() {
@@ -87,14 +122,6 @@ public class Paper {
         this.keepTime = keepTime;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @Override
     public String toString() {
         return "Paper{" +
@@ -102,7 +129,10 @@ public class Paper {
                 ", title='" + title + '\'' +
                 ", content=" + content +
                 ", createuser=" + createuser +
+                ", createusername='" + createusername + '\'' +
                 ", classid=" + classid +
+                ", className='" + className + '\'' +
+                ", course='" + course + '\'' +
                 ", singlescore=" + singlescore +
                 ", multiplescore=" + multiplescore +
                 ", startTime='" + startTime + '\'' +

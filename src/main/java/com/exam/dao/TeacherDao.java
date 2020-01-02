@@ -13,17 +13,11 @@ public interface TeacherDao {
     // 修改个人信息
     int updateTeacherInfo(Teacher teacher);
 
-    // 查询所有学生 --老师id
-    List<Student> selectAllStudents(int teacherid);
-
-    // 查看学生信息
-    Student selectStudentInfoByid(int studentid);
-
     // 修改学生信息
     int updateSutdentInfo(Student student);
 
     // 添加题库
-    int addQuestions(ArrayList<Question> questionArrayList);
+    int addQuestions(@Param("list") ArrayList<Test> questionArrayList);
 
     //
     @MapKey("id")
@@ -50,6 +44,33 @@ public interface TeacherDao {
     int updateQuestion(int questionid);
 
     // 查询整个班级考试结果
-    List<ResultPaper> selectAllClazzResultPaper(int clazzid);
+    ArrayList<ResultPaper> selectAllClazzResultPaper(int teacherid);
 
+    ArrayList<Paper> selectAllPaper(Integer teacherid);
+
+    // 查询所有学生 --老师id
+    ArrayList<Student> selectAllStudents(int teacherid);
+    // 查询所有题
+    List<Test> selectAllTest();
+
+    // 查看学生信息
+    Student selectStudentInfoByid(int studentid);
+    //删除学生信息
+    //by zjj
+    boolean deleteStudent(int id);
+    //删除学生信息
+    //by zjj
+    boolean deleteTest(int id);
+    // 修改学生信息
+    //by zjj
+    int updateSutdentInfo(List list);
+    // 修改题
+    //by zjj
+    int updateAllTest(List list);
+    // 添加题
+    //by zjj
+    int insertTest(List list);
+    // 添加用户
+    //by zjj
+    int insertUser(List list);
 }

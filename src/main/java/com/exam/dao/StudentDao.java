@@ -2,6 +2,7 @@ package com.exam.dao;
 
 import com.exam.demain.Paper;
 import com.exam.demain.Question;
+import com.exam.demain.ResultPaper;
 import com.exam.demain.Student;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,7 +16,7 @@ public interface StudentDao {
     List<Paper> selectAllPaperByClassid(int classid);
 
     // 查询试卷（考试结果）
-    Paper selectMyResultPaper(int paperid);
+    List<ResultPaper> selectMyResultPaper(int studentid);
 
     // 获取单元测试题
     List<Question> selectUnitTestQuestions(String type);
@@ -30,6 +31,9 @@ public interface StudentDao {
     int updatePaperStatusToStop(@Param("paperid") int paperid);
 
 
+    ResultPaper selectMySubPaperBypaperid(int paperid);
 
+    Integer updateUserInfo(@Param("student")Student student);
 
+    Student selectUserByid(int id);
 }

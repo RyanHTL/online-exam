@@ -26,12 +26,7 @@ public class TeacherServicesImpl implements TeacherServices {
     }
 
     @Override
-    public List<Student> selectAllStudents(int teacherid) {
-        return null;
-    }
-
-    @Override
-    public Student selectStudentInfoByid(int  studentid) {
+    public Student selectStudentInfoByid(int studentid) {
         return null;
     }
 
@@ -41,13 +36,13 @@ public class TeacherServicesImpl implements TeacherServices {
     }
 
     @Override
-    public int addQuestions(ArrayList<Question> questionArrayList) {
-        return 0;
+    public int addQuestions(ArrayList<Test> questionArrayList) {
+        return dao.addQuestions(questionArrayList);
     }
 
     @Override
     public Map<Integer, Test> findResultByRule(int single, int multiple) {
-        return dao.findResultByRule(single,multiple);
+        return dao.findResultByRule(single, multiple);
     }
 
     @Override
@@ -56,8 +51,9 @@ public class TeacherServicesImpl implements TeacherServices {
     }
 
     @Override
-    public int addParperToStatus(int teacherid,int coursed, int testid,int classid,int status,String starttime, String endtime,String keeptime) {
-        return dao.addParperToStatus(teacherid,coursed,testid,classid,status,starttime,endtime,keeptime);
+    public int addParperToStatus(int teacherid, int coursed, int testid, int classid, int status, String starttime, String endtime, String keeptime) {
+        System.out.println("paperInfo2=>" + coursed + " " + testid + " " + teacherid + " " + classid + " " + status + " " + starttime + " " + endtime + " " + keeptime);
+        return dao.addParperToStatus(teacherid, coursed, testid, classid, status, starttime, endtime, keeptime);
     }
 
 
@@ -72,7 +68,59 @@ public class TeacherServicesImpl implements TeacherServices {
     }
 
     @Override
-    public List<ResultPaper> selectAllClazzResultPaper(int clazzid) {
-        return null;
+    public ArrayList<ResultPaper> selectAllClazzResultPaper(int teacherid) {
+        return dao.selectAllClazzResultPaper(teacherid);
+    }
+
+    @Override
+    public ArrayList<Paper> selectAllPaper(Integer teacherid) {
+        return dao.selectAllPaper(teacherid);
+    }
+
+    @Override
+    //by zjj 修改学生信息
+    public int updateSutdentInfo(List list) {
+        return dao.updateSutdentInfo(list);
+    }
+
+    @Override
+    //by zjj 删除学生信息
+    public boolean deleteStudent(int id) {
+        return dao.deleteStudent(id);
+    }
+
+    @Override
+    //by zjj 修改题
+    public int updateAllTest(List list) {
+        return dao.updateAllTest(list);
+    }
+
+    @Override
+    //by zjj 添加题
+    public int insertTest(List list) {
+        return dao.insertTest(list);
+    }
+
+    @Override
+    //by zjj 添加用户
+    public int insertUser(List list) {
+        return dao.insertUser(list);
+    }
+
+    @Override
+    //by zjj 删除学生信息
+    public boolean deleteTest(int id) {
+        return dao.deleteTest(id);
+    }
+
+    @Override
+    // 查询所有题
+    public List<Test> selectAllTest() {
+        return dao.selectAllTest();
+    }
+
+    @Override
+    public ArrayList<Student> selectAllStudents(int teacherid) {
+        return dao.selectAllStudents(teacherid);
     }
 }
